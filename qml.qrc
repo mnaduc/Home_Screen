@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>StatusBar.qml</file>
+        <file>Test.qml</file>
+        <file>HomeScreen.qml</file>
+        <file>ClimateWidget.qml</file>
+        <file>MapWidget.qml</file>
+        <file>MediaWidget.qml</file>
+    </qresource>
+</RCC>
