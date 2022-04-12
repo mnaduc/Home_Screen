@@ -43,6 +43,6 @@
         <file>Img/appMenu/icon/icon_navigation.png</file>
         <file>Img/appMenu/icon/icon_phone.png</file>
         <file>Img/appMenu/icon/icon_radio.png</file>
-        <file>Img/appMenu/icon/settings.png</file>
+        <file>Img/appMenu/icon/icon_settings.png</file>
     </qresource>
 </RCC>
