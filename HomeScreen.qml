@@ -37,7 +37,6 @@ Item {
 
     ListView {
         id: menuId
-        property int focusIndex : 2
         width: 1900
         height: 450
         spacing: 26
@@ -65,7 +64,7 @@ Item {
             }
             delegate: DropArea {
                 property int dropAreaIndex: DelegateModel.itemsIndex
-                Binding { target: appItemId; property: "visualIndex"; value: dropAreaIndex }
+//                Binding { target: appItemId; property: "visualIndex"; value: dropAreaIndex }
                 width: 295
                 height: 450
                 keys: "dragAppMenu"
@@ -75,7 +74,7 @@ Item {
                 MouseArea {
                     id: appItemId
                     property bool draggable: false
-                    property int visualIndex: 0
+                    property int visualIndex: parent.dropAreaIndex
                     width: 295
                     height: 450
                     drag.target: draggable ? appItemId : null
@@ -108,7 +107,7 @@ Item {
                     }
                     //focus state
                     Image {
-                        source: menuId.focus & menuId.focusIndex == parent.visualIndex ? "qrc:/Img/appMenu/app_item_f.png":""
+                        source: menuId.focus & menuId.currentIndex == parent.visualIndex ? "qrc:/Img/appMenu/app_item_f.png":""
                     }
                     // press state
                     Image {
@@ -117,7 +116,7 @@ Item {
                     onPressAndHold: {
                         appItemId.draggable = true
                         menuId.focus = true
-                        menuId.focusIndex = visualIndex
+                        menuId.currentIndex = visualIndex
                     }
                 }
             }
