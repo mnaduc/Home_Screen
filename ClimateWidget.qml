@@ -3,6 +3,7 @@ import QtQuick 2.12
 MouseArea {
     width: 616
     height: 496
+    onClicked: focus = true
     // background
     Image {
         source: "qrc:/Img/widget/widget_bg.png"

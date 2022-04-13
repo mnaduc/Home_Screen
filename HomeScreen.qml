@@ -4,6 +4,7 @@ import QtQuick.Controls 2.12
 import QtGraphicalEffects 1.12
 
 Item {
+    id: rootId
     width: 1920
     height: 978
     //Widget Area
@@ -40,6 +41,9 @@ Item {
         width: 1900
         height: 450
         spacing: 26
+        displaced: Transition {
+            NumberAnimation { properties: "x,y"; easing.type: Easing.OutQuad }
+        }
         orientation: ListView.Horizontal
         anchors {
             horizontalCenter: parent.horizontalCenter
@@ -47,6 +51,7 @@ Item {
             bottomMargin: 15
         }
         model: DelegateModel {
+            id: delegateModelId
             model: ListModel {
                 ListElement {name: "Climate"; icon: "qrc:/Img/appMenu/icon/icon_climate.png"}
                 ListElement {name: "Media"; icon: "qrc:/Img/appMenu/icon/icon_media.png"}
@@ -60,27 +65,48 @@ Item {
                 ListElement {name: "Phone"; icon: "qrc:/Img/appMenu/icon/icon_phone.png"}
                 ListElement {name: "Radio"; icon: "qrc:/Img/appMenu/icon/icon_radio.png"}
                 ListElement {name: "Settings"; icon: "qrc:/Img/appMenu/icon/icon_settings.png"}
-
             }
             delegate: DropArea {
+                id: delegateId
                 property int dropAreaIndex: DelegateModel.itemsIndex
-//                Binding { target: appItemId; property: "visualIndex"; value: dropAreaIndex }
                 width: 295
                 height: 450
                 keys: "dragAppMenu"
-                onEntered: console.log(dropAreaIndex + " - enter")
-                onExited: console.log(dropAreaIndex + " - exit")
-                onDropped: console.log(dropAreaIndex + " - drop")
+                onEntered: {
+                    var sourceIndex = drag.source.visualIndex
+                    var desIndex = appItemId.visualIndex
+                    if (sourceIndex != desIndex){
+                        delegateModelId.items.move(drag.source.visualIndex, appItemId.visualIndex)
+                        if (sourceIndex < desIndex) {
+                            menuId.incrementCurrentIndex()
+                        } else if(sourceIndex > desIndex) {
+                            menuId.decrementCurrentIndex()
+                        }
+                    }
+                }
                 MouseArea {
                     id: appItemId
                     property bool draggable: false
-                    property int visualIndex: parent.dropAreaIndex
+                    property int visualIndex: delegateId.dropAreaIndex
+
                     width: 295
                     height: 450
                     drag.target: draggable ? appItemId : null
                     drag.axis: Drag.XAxis
                     Drag.active: appItemId.drag.active
                     Drag.keys: "dragAppMenu"
+                    Drag.hotSpot.x: width/2
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    onPressAndHold: {
+                        appItemId.draggable = true
+                        menuId.focus = true
+                        menuId.currentIndex = visualIndex
+                    }
+                    onClicked: {
+                        menuId.focus = true
+                        menuId.currentIndex = visualIndex
+                    }
+                    onReleased: appItemId.draggable = false
                     Image {
                         source: "qrc:/Img/appMenu/app_item_bg.png"
                     }
@@ -113,11 +139,28 @@ Item {
                     Image {
                         source: parent.pressed & !parent.draggable ? "qrc:/Img/appMenu/app_item_p.png":""
                     }
-                    onPressAndHold: {
-                        appItemId.draggable = true
-                        menuId.focus = true
-                        menuId.currentIndex = visualIndex
-                    }
+                    states: [
+                        State {
+                            when: appItemId.draggable
+                            ParentChange {
+                                target: appItemId
+                                parent: rootId
+                            }
+
+                            AnchorChanges {
+                                target: appItemId
+                                anchors.horizontalCenter: undefined
+                                anchors.verticalCenter: undefined
+                            }
+                            PropertyChanges {
+                                target: menuId
+                                highlightRangeMode: ListView.ApplyRange
+                                highlightMoveDuration: 500
+                                preferredHighlightBegin: 321
+                                preferredHighlightEnd: 1579
+                            }
+                        }
+                    ]
                 }
             }
         }
@@ -127,5 +170,5 @@ Item {
             anchors.bottom: menuId.top
             anchors.bottomMargin: -10
         }
-   }
+    }
 }

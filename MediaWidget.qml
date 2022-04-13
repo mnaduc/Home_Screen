@@ -7,6 +7,7 @@ MouseArea {
     property url albumArtUrl: "qrc:/Img/widget/media/albumArt_exm.png"
     width: 616
     height: 496
+    onClicked: focus = true
     //background
     FastBlur {
         anchors.fill: parent

@@ -3,6 +3,7 @@ import QtQuick 2.12
 MouseArea {
     height: 496
     width: 616
+    onClicked: focus = true
     Image {
         source: "qrc:/Img/widget/map/map_exm.png"
     }
