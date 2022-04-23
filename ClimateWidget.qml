@@ -23,7 +23,7 @@ MouseArea {
     }
     Image {
         id: fanLevelId
-        property int level: 7
+        property int level: climateModel.fan_level
         source: "qrc:/Img/widget/climate/widget_climate_wind_level_bg.png"
         anchors.centerIn: parent
         Image {
@@ -74,7 +74,7 @@ MouseArea {
     }
     Text {
         id: autoModeId
-        property bool state: true
+        property bool state: climateModel.auto_mode
         text: qsTr("AUTO")
         font.family: "Arial"
         font.pixelSize: 40
@@ -88,7 +88,7 @@ MouseArea {
     }
     Text {
         id: syncModeId
-        property bool state: false
+        property bool state: climateModel.sync_mode
         text: qsTr("SYNC")
         font.family: "Arial"
         font.pixelSize: 40
@@ -103,8 +103,8 @@ MouseArea {
     // Driver
     Item {
         id: windDirectionDriverId
-        property bool faceDirectionstate: true
-        property bool footDirectionstate: true
+        property bool faceDirectionstate: climateModel.driver_wind_mode != 1
+        property bool footDirectionstate: climateModel.driver_wind_mode != 0
         width: 160
         height: 120
         anchors {
@@ -155,7 +155,7 @@ MouseArea {
     }
     Text {
         id: temDriverId
-        property double temp: 32
+        property double temp: climateModel.driver_temp
         text: "##.#°C"
         color: "#EEEEEE"
         font.family: "Arial"
@@ -180,8 +180,8 @@ MouseArea {
     // Passenger
     Item {
         id: windDirectionPassengerId
-        property bool faceDirectionstate: true
-        property bool footDirectionstate: true
+        property bool faceDirectionstate: climateModel.passenger_wind_mode != 1
+        property bool footDirectionstate: climateModel.passenger_wind_mode != 0
         width: 160
         height: 120
         anchors {
@@ -233,7 +233,7 @@ MouseArea {
     }
     Text {
         id: temPassengerId
-        property double temp: 25.5
+        property double temp: climateModel.passenger_temp
         text: "##.#°C"
         color: "#EEEEEE"
         font.family: "Arial"

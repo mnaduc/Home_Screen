@@ -13,32 +13,61 @@ Window {
     }
     StatusBar {
         id: statusBarId
-        onBackClicked: stackViewId.pop()
+        onBackClicked: stackViewId.pop(null)
         isShowBackBtn: stackViewId.depth == 1 ? false : true
-    }
-    Rectangle {
-        width: 50
-        height: 50
-        anchors.right: parent.right
-        color: "red"
-        MouseArea {
-            anchors.fill: parent
-            onClicked: stackViewId.push("qrc:/Test.qml")
-        }
     }
     StackView {
         id: stackViewId
+        property int animationSpeed: 600
         width: 1920
         height: 978
         anchors.top: statusBarId.bottom
+        Keys.onPressed: {
+            switch(event.key){
+            case Qt.Key_N:
+                console.log("Key shortcut: Navigation")
+                push("qrc:/App/Map/Map_app.qml")
+                break;
+            case Qt.Key_C:
+                console.log("Key shortcut: Climate")
+                push("qrc:/App/Climate/Climate_app.qml")
+                break;
+            case Qt.Key_M:
+                console.log("Key shortcut: Media")
+                push("qrc:/App/Media/Media_app.qml")
+                break;
+            case Qt.Key_Backspace:
+                pop(null)
+                break;
+            }
+        }
         initialItem: HomeScreen {
-            id: homeScreenID
+            id: homeScreenId
+        }
+        onCurrentItemChanged: {
+            currentItem.forceActiveFocus()
         }
         pushEnter: Transition {
             XAnimator {
                 from: 1920
                 to: 0
-                duration: 800
+                duration: stackViewId.animationSpeed
+                easing.type: Easing.OutCubic
+            }
+        }
+        pushExit: Transition {
+            OpacityAnimator {
+                from: 1
+                to: 0
+                duration: stackViewId.animationSpeed
+                easing.type: Easing.OutCubic
+            }
+        }
+        popEnter: Transition {
+            OpacityAnimator {
+                from: 0
+                to: 1
+                duration: stackViewId.animationSpeed
                 easing.type: Easing.OutCubic
             }
         }
@@ -46,18 +75,9 @@ Window {
             XAnimator {
                 from: 0
                 to: 1920
-                duration: 800
+                duration: stackViewId.animationSpeed
                 easing.type: Easing.OutCubic
             }
         }
-        pushExit: Transition {
-            XAnimator {
-                from: 0
-                to: 0
-                duration: 800
-                easing.type: Easing.OutCubic
-            }
-        }
-        popEnter: pushExit
     }
 }

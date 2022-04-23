@@ -1,10 +1,12 @@
 import QtQuick 2.12
+import QtQml 2.12
 
 Item {
     width: 1920
     height: 102
-    signal backClicked
     property alias isShowBackBtn: btnBackId.visible
+    property var time: new Date
+    signal backClicked
     //Back Button
     MouseArea {
         id: btnBackId
@@ -64,5 +66,20 @@ Item {
         source: "qrc:/Img/statusBar/status_divider.png"
         anchors.left: txtDateId.right
         anchors.verticalCenter: parent.verticalCenter
+    }
+    Timer{
+        interval: 1000
+        repeat: true
+        running: true
+        onTriggered: {
+            var time = new Date()
+            txtTimeId.text = time.toLocaleTimeString(Qt.locale(), "hh:mm");
+            txtDateId.text = time.toLocaleDateString(Qt.locale(qsTr("STR_locale")), "MMM. dd"); // en_US vi_VN
+        }
+    }
+    Component.onCompleted: {
+        var time = new Date()
+        txtTimeId.text = time.toLocaleTimeString(Qt.locale(), "hh:mm");
+        txtDateId.text = time.toLocaleDateString(Qt.locale(qsTr("STR_locale")), "MMM. dd"); // en_US vi_VN
     }
 }

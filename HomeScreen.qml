@@ -7,6 +7,16 @@ Item {
     id: rootId
     width: 1920
     height: 978
+    property var lastFocus : menuId
+
+    function openApplication(url){
+        parent.push(url)
+    }
+    onActiveFocusChanged: {
+        console.log("on Active Focus Change")
+        lastFocus.forceActiveFocus()
+    }
+
     //Widget Area
     Item {
         id: widgetAreaId
@@ -19,6 +29,24 @@ Item {
         ClimateWidget {
             id: climateWidgetId
             anchors.centerIn: parent
+            onClicked: openApplication("qrc:/App/Climate/Climate_app.qml")
+            onFocusChanged: lastFocus = climateWidgetId
+            Keys.onPressed: {
+                switch(event.key) {
+                case Qt.Key_Return:
+                    openApplication("qrc:/App/Climate/Climate_app.qml")
+                    break
+                case Qt.Key_Down:
+                    menuId.forceActiveFocus()
+                    break
+                case Qt.Key_Right:
+                    mediaWidgetId.forceActiveFocus()
+                    break
+                case Qt.Key_Left:
+                    mapWidgetId.forceActiveFocus()
+                    break
+                }
+            }
         }
         MapWidget {
             id: mapWidgetId
@@ -26,6 +54,22 @@ Item {
                 right: climateWidgetId.left
                 rightMargin: 26
             }
+            onClicked: openApplication("qrc:/App/Map/Map_app.qml")
+            onFocusChanged: lastFocus = mapWidgetId
+            Keys.onPressed: {
+                switch(event.key) {
+                case Qt.Key_Return:
+                    openApplication("qrc:/App/Map/Map_app.qml")
+                    break
+                case Qt.Key_Down:
+                    menuId.forceActiveFocus()
+                    break
+                case Qt.Key_Right:
+                    climateWidgetId.forceActiveFocus()
+                    break
+                }
+            }
+
         }
         MediaWidget {
             id: mediaWidgetId
@@ -33,16 +77,35 @@ Item {
                 left: climateWidgetId.right
                 leftMargin: 26
             }
+            onClicked: openApplication("qrc:/App/Media/Media_app.qml")
+            onFocusChanged: lastFocus = mediaWidgetId
+            Keys.onPressed: {
+               switch(event.key) {
+               case Qt.Key_Return:
+                   openApplication("qrc:/App/Media/Media_app.qml")
+                   break
+               case Qt.Key_Down:
+                   menuId.forceActiveFocus()
+                   break
+               case Qt.Key_Left:
+                   climateWidgetId.forceActiveFocus()
+                   break
+               }
+            }
+
         }
     }
 
     ListView {
         id: menuId
+        property int focusIndex: 0
         width: 1900
         height: 450
         spacing: 26
+        interactive: menuId.count < 7 ? false : true
+        onFocusChanged: lastFocus = menuId
         displaced: Transition {
-            NumberAnimation { properties: "x,y"; easing.type: Easing.OutQuad }
+            NumberAnimation { properties: "x,y"; easing.type: Easing.OutQuad; duration: 500 }
         }
         orientation: ListView.Horizontal
         anchors {
@@ -52,20 +115,7 @@ Item {
         }
         model: DelegateModel {
             id: delegateModelId
-            model: ListModel {
-                ListElement {name: "Climate"; icon: "qrc:/Img/appMenu/icon/icon_climate.png"}
-                ListElement {name: "Media"; icon: "qrc:/Img/appMenu/icon/icon_media.png"}
-                ListElement {name: "Navigation"; icon: "qrc:/Img/appMenu/icon/icon_navigation.png"}
-                ListElement {name: "Phone"; icon: "qrc:/Img/appMenu/icon/icon_phone.png"}
-                ListElement {name: "Radio"; icon: "qrc:/Img/appMenu/icon/icon_radio.png"}
-                ListElement {name: "Settings"; icon: "qrc:/Img/appMenu/icon/icon_settings.png"}
-                ListElement {name: "Climate"; icon: "qrc:/Img/appMenu/icon/icon_climate.png"}
-                ListElement {name: "Media"; icon: "qrc:/Img/appMenu/icon/icon_media.png"}
-                ListElement {name: "Navigation"; icon: "qrc:/Img/appMenu/icon/icon_navigation.png"}
-                ListElement {name: "Phone"; icon: "qrc:/Img/appMenu/icon/icon_phone.png"}
-                ListElement {name: "Radio"; icon: "qrc:/Img/appMenu/icon/icon_radio.png"}
-                ListElement {name: "Settings"; icon: "qrc:/Img/appMenu/icon/icon_settings.png"}
-            }
+            model: appModel
             delegate: DropArea {
                 id: delegateId
                 property int dropAreaIndex: DelegateModel.itemsIndex
@@ -76,11 +126,12 @@ Item {
                     var sourceIndex = drag.source.visualIndex
                     var desIndex = appItemId.visualIndex
                     if (sourceIndex != desIndex){
-                        delegateModelId.items.move(drag.source.visualIndex, appItemId.visualIndex)
+                        appModel.move(sourceIndex, desIndex);
+                        menuId.focusIndex = drag.source.visualIndex
                         if (sourceIndex < desIndex) {
-                            menuId.incrementCurrentIndex()
+                            menuId.currentIndex = menuId.focusIndex + 1
                         } else if(sourceIndex > desIndex) {
-                            menuId.decrementCurrentIndex()
+                            menuId.currentIndex = menuId.focusIndex - 1
                         }
                     }
                 }
@@ -98,22 +149,31 @@ Item {
                     Drag.hotSpot.x: width/2
                     anchors.horizontalCenter: parent.horizontalCenter
                     onPressAndHold: {
+                        menuId.focus = true
+                        menuId.focusIndex = visualIndex
                         appItemId.draggable = true
-                        menuId.focus = true
-                        menuId.currentIndex = visualIndex
+                        menuId.currentIndex = menuId.focusIndex
+                        console.log("mouse-listapp: press and hold")
                     }
-                    onClicked: {
+                    onReleased: {
                         menuId.focus = true
-                        menuId.currentIndex = visualIndex
+                        menuId.focusIndex = visualIndex
+                        menuId.currentIndex = menuId.focusIndex
+                        if(appItemId.draggable) {
+                            appModel.writeXml();
+                        }
+                        appItemId.draggable = false
+                        console.log("mouse-listapp: release")
                     }
-                    onReleased: appItemId.draggable = false
+                    onClicked: openApplication(model.url)
                     Image {
                         source: "qrc:/Img/appMenu/app_item_bg.png"
                     }
                     Image {
                         height: 135
                         width: 135
-                        source: model.icon
+                        source: model.iconPath
+                        fillMode: Image.PreserveAspectFit
                         anchors {
                             horizontalCenter: parent.horizontalCenter
                             top: parent.top
@@ -124,7 +184,7 @@ Item {
                         color: "#ABABAB"
                         font.family: "Arial"
                         font.pixelSize: 34
-                        text: qsTr(model.name)
+                        text: qsTr(model.title)
                         anchors {
                             horizontalCenter: parent.horizontalCenter
                             bottom: parent.bottom
@@ -133,7 +193,7 @@ Item {
                     }
                     //focus state
                     Image {
-                        source: menuId.focus & menuId.currentIndex == parent.visualIndex ? "qrc:/Img/appMenu/app_item_f.png":""
+                        source: menuId.focus & menuId.focusIndex == parent.visualIndex ? "qrc:/Img/appMenu/app_item_f.png":""
                     }
                     // press state
                     Image {
@@ -153,11 +213,8 @@ Item {
                                 anchors.verticalCenter: undefined
                             }
                             PropertyChanges {
-                                target: menuId
-                                highlightRangeMode: ListView.ApplyRange
-                                highlightMoveDuration: 500
-                                preferredHighlightBegin: 321
-                                preferredHighlightEnd: 1579
+                                target: scrollBarId
+                                active: true
                             }
                         }
                     ]
@@ -165,10 +222,29 @@ Item {
             }
         }
         ScrollBar.horizontal: ScrollBar {
+            id: scrollBarId
             active: true
             height: 12
             anchors.bottom: menuId.top
             anchors.bottomMargin: -10
         }
+        highlightMoveDuration: 400
+        Keys.onPressed: {
+            switch(event.key) {
+            case Qt.Key_Return:
+                openApplication(appModel.data(appModel.index(menuId.focusIndex,0), Qt.UserRole + 2))
+                break;
+            case Qt.Key_Right:
+                if(menuId.focusIndex < menuId.count - 1) menuId.focusIndex++;
+                break;
+            case Qt.Key_Left:
+                if(menuId.focusIndex > 0) menuId.focusIndex--;
+                break
+            case Qt.Key_Up:
+                climateWidgetId.forceActiveFocus()
+                break
+            }
+        }
+        Component.onCompleted: menuId.forceActiveFocus()
     }
 }

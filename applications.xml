@@ -1,0 +1,67 @@
+<APPLICATIONS>
+ <APP ID="0">
+  <TITLE>Climate</TITLE>
+  <URL>qrc:/App/Climate/Climate_app.qml</URL>
+  <ICON_PATH>qrc:/Img/appMenu/icon/icon_climate.png</ICON_PATH>
+ </APP>
+ <APP ID="1">
+  <TITLE>Map</TITLE>
+  <URL>qrc:/App/Map/Map_app.qml</URL>
+  <ICON_PATH>qrc:/Img/appMenu/icon/icon_map.png</ICON_PATH>
+ </APP>
+ <APP ID="2">
+  <TITLE>Radio</TITLE>
+  <URL>qrc:/App/Radio/Radio_app.qml</URL>
+  <ICON_PATH>qrc:/Img/appMenu/icon/icon_radio.png</ICON_PATH>
+ </APP>
+ <APP ID="3">
+  <TITLE>Facebook</TITLE>
+  <URL>qrc:/App/Facebook/Facebook_app.qml</URL>
+  <ICON_PATH>qrc:/Img/appMenu/icon/icon_facebook.png</ICON_PATH>
+ </APP>
+ <APP ID="4">
+  <TITLE>Phone</TITLE>
+  <URL>qrc:/App/Phone/Phone_app.qml</URL>
+  <ICON_PATH>qrc:/Img/appMenu/icon/icon_phone.png</ICON_PATH>
+ </APP>
+ <APP ID="5">
+  <TITLE>Media</TITLE>
+  <URL>qrc:/App/Media/Media_app.qml</URL>
+  <ICON_PATH>qrc:/Img/appMenu/icon/icon_media.png</ICON_PATH>
+ </APP>
+ <APP ID="6">
+  <TITLE>Instagram</TITLE>
+  <URL>qrc:/App/Instagram/Instagram_app.qml</URL>
+  <ICON_PATH>qrc:/Img/appMenu/icon/icon_instagram.png</ICON_PATH>
+ </APP>
+ <APP ID="7">
+  <TITLE>Spotify</TITLE>
+  <URL>qrc:/App/Spotify/Spotify_app.qml</URL>
+  <ICON_PATH>qrc:/Img/appMenu/icon/icon_spotify.png</ICON_PATH>
+ </APP>
+ <APP ID="8">
+  <TITLE>Settings</TITLE>
+  <URL>qrc:/App/Settings/Settings_app.qml</URL>
+  <ICON_PATH>qrc:/Img/appMenu/icon/icon_settings.png</ICON_PATH>
+ </APP>
+ <APP ID="9">
+  <TITLE>Vinfast</TITLE>
+  <URL>qrc:/App/Vinfast/Vinfast_app.qml</URL>
+  <ICON_PATH>qrc:/Img/appMenu/icon/icon_vinfast.png</ICON_PATH>
+ </APP>
+ <APP ID="10">
+  <TITLE>Audi</TITLE>
+  <URL>qrc:/App/Audi/Audi_app.qml</URL>
+  <ICON_PATH>qrc:/Img/appMenu/icon/icon_audi.png</ICON_PATH>
+ </APP>
+ <APP ID="11">
+  <TITLE>Mercedes</TITLE>
+  <URL>qrc:/App/Mercedes/Mercedes_app.qml</URL>
+  <ICON_PATH>qrc:/Img/appMenu/icon/icon_mercedes.png</ICON_PATH>
+ </APP>
+ <APP ID="12">
+  <TITLE>Rolls Royce</TITLE>
+  <URL>qrc:/App/RollsRoyce/RollsRoyce_app.qml</URL>
+  <ICON_PATH>qrc:/Img/appMenu/icon/icon_rollsroyce.png</ICON_PATH>
+ </APP>
+</APPLICATIONS>

@@ -4,7 +4,7 @@ import QtGraphicalEffects 1.12
 
 MouseArea {
     id: rootId
-    property url albumArtUrl: "qrc:/Img/widget/media/albumArt_exm.png"
+    property url albumArtUrl: mediaModel.data(mediaModel.index(player.playlist.currentIndex,0), Qt.UserRole + 4)
     width: 616
     height: 496
     onClicked: focus = true
@@ -54,10 +54,11 @@ MouseArea {
     Slider {
         id: progressBarId
         from: 0
-        value: 75
-        to:100
+        to: player.duration
+        value: player.position
         width: 510
         height: 6
+        enabled: false
         anchors {
             horizontalCenter: parent.horizontalCenter
             bottom: parent.bottom
@@ -77,7 +78,7 @@ MouseArea {
     }
     Text {
         id: songNameId
-        text: "Chuyen Cua Mua Dong"
+        text: mediaModel.data(mediaModel.index(player.playlist.currentIndex,0), Qt.UserRole + 1)
         color: "#EEEEEE"
         font.family: "Arial"
         font.pixelSize: 44
@@ -89,7 +90,7 @@ MouseArea {
     }
     Text {
         id: singerId
-        text: "Ha Anh Tuan"
+        text: mediaModel.data(mediaModel.index(player.playlist.currentIndex,0), Qt.UserRole + 2)
         color: "#EEEEEE"
         font.family: "Arial"
         font.pixelSize: 26

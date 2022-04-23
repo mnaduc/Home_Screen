@@ -40,9 +40,58 @@
         <file>Img/appMenu/app_item_p.png</file>
         <file>Img/appMenu/icon/icon_climate.png</file>
         <file>Img/appMenu/icon/icon_media.png</file>
-        <file>Img/appMenu/icon/icon_navigation.png</file>
+        <file>Img/appMenu/icon/icon_map.png</file>
         <file>Img/appMenu/icon/icon_phone.png</file>
         <file>Img/appMenu/icon/icon_radio.png</file>
         <file>Img/appMenu/icon/icon_settings.png</file>
+        <file>App/Media/Img/album_art.png</file>
+        <file>App/Media/Img/back.png</file>
+        <file>App/Media/Img/background.png</file>
+        <file>App/Media/Img/Bui-Anh-Tuan.png</file>
+        <file>App/Media/Img/center_point.png</file>
+        <file>App/Media/Img/drawer.png</file>
+        <file>App/Media/Img/drawer_p.png</file>
+        <file>App/Media/Img/Ha-Anh-Tuan.png</file>
+        <file>App/Media/Img/hold.png</file>
+        <file>App/Media/Img/hold-next.png</file>
+        <file>App/Media/Img/hold-pause.png</file>
+        <file>App/Media/Img/hold-play.png</file>
+        <file>App/Media/Img/hold-prev.png</file>
+        <file>App/Media/Img/Hongkong1.png</file>
+        <file>App/Media/Img/music.png</file>
+        <file>App/Media/Img/next.png</file>
+        <file>App/Media/Img/pause.png</file>
+        <file>App/Media/Img/play.png</file>
+        <file>App/Media/Img/playing.png</file>
+        <file>App/Media/Img/playlist.png</file>
+        <file>App/Media/Img/playlist_item.png</file>
+        <file>App/Media/Img/point.png</file>
+        <file>App/Media/Img/prev.png</file>
+        <file>App/Media/Img/progress_bar.png</file>
+        <file>App/Media/Img/progress_bar_bg.png</file>
+        <file>App/Media/Img/repeat.png</file>
+        <file>App/Media/Img/repeat1_hold.png</file>
+        <file>App/Media/Img/shuffle.png</file>
+        <file>App/Media/Img/shuffle-1.png</file>
+        <file>App/Media/Img/title.png</file>
+        <file>App/Media/Img/us.png</file>
+        <file>App/Media/Img/USB Mussic.png</file>
+        <file>App/Media/Img/vn.png</file>
+        <file>Img/appMenu/icon/icon_vinfast.png</file>
+        <file>Img/appMenu/icon/icon_spotify.png</file>
+        <file>Img/appMenu/icon/icon_rollsroyce.png</file>
+        <file>Img/appMenu/icon/icon_mercedes.png</file>
+        <file>Img/appMenu/icon/icon_instagram.png</file>
+        <file>Img/appMenu/icon/icon_facebook.png</file>
+        <file>Img/appMenu/icon/icon_audi.png</file>
+        <file>App/Audi/Audi.jpg</file>
+        <file>App/Facebook/Facebook.jpg</file>
+        <file>App/Instagram/Instagram.png</file>
+        <file>App/Mercedes/Mercedes.jpg</file>
+        <file>App/Phone/Phone.jpg</file>
+        <file>App/Radio/Radio.jpg</file>
+        <file>App/Spotify/Spotify.png</file>
+        <file>App/Vinfast/Vinfast.jpg</file>
+        <file>App/RollsRoyce/RollsRoyce.jpg</file>
     </qresource>
 </RCC>
