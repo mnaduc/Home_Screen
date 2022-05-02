@@ -6,7 +6,7 @@ Item {
     height: 978
 
     Image {
-        source: "qrc:/App/RollsRoyce/RollsRoyce.jpg"
+        source: "qrc:/App/RollsRoyce/RollsRoyce.png"
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
     }

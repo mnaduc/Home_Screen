@@ -6,7 +6,7 @@ Item {
     height: 978
 
     Image {
-        source: "qrc:/App/Audi/Audi.jpg"
+        source: "qrc:/App/Audi/Audi.png"
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
     }

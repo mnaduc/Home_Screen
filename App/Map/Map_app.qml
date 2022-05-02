@@ -35,18 +35,19 @@ Item {
         }
     }
     Rectangle {
+        id: bgId
         color: "black"
         width: parent.width
         height: 100
         opacity: 0.6
         anchors.top: parent.top
-        Text {
-            id: name
-            text: qsTr("STR_Map_title")
-            anchors.centerIn: parent
-            color: "#EEEEEE"
-            font.family: "Arial"
-            font.pixelSize: 40
-        }
+    }
+    Text {
+        id: name
+        text: qsTr("STR_Map_title")
+        anchors.centerIn: bgId
+        color: "white"
+        font.family: "Arial"
+        font.pixelSize: 50
     }
 }

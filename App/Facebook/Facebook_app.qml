@@ -6,7 +6,7 @@ Item {
     height: 978
 
     Image {
-        source: "qrc:/App/Facebook/Facebook.jpg"
+        source: "qrc:/App/Facebook/Facebook.png"
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
     }

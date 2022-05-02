@@ -23,13 +23,6 @@ private:
     int GetFanLevel() const;
     int GetAutoMode() const;
     int GetSyncMode() const;
-//    double m_driver_temp;
-//    double m_passenger_temp;
-//    int m_driver_wind_mode;
-//    int m_passenger_wind_mode;
-//    int m_fan_level;
-//    int m_auto_mode;
-//    int m_sync_mode;
 public:
     explicit ClimateModel(QObject *parent = nullptr);
 signals:

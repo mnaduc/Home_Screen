@@ -68,18 +68,23 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
     }
     Timer{
-        interval: 1000
-        repeat: true
-        running: true
-        onTriggered: {
+        id: timerId
+        function updateTime () {
             var time = new Date()
             txtTimeId.text = time.toLocaleTimeString(Qt.locale(), "hh:mm");
             txtDateId.text = time.toLocaleDateString(Qt.locale(qsTr("STR_locale")), "MMM. dd"); // en_US vi_VN
         }
+        repeat: true
+        onTriggered: updateTime()
     }
+
+    Connections {
+        target: Translator
+        onLanguageChanged: timerId.updateTime()
+    }
+
     Component.onCompleted: {
-        var time = new Date()
-        txtTimeId.text = time.toLocaleTimeString(Qt.locale(), "hh:mm");
-        txtDateId.text = time.toLocaleDateString(Qt.locale(qsTr("STR_locale")), "MMM. dd"); // en_US vi_VN
+        timerId.start()
+        timerId.updateTime()
     }
 }

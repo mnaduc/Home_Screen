@@ -12,7 +12,8 @@ SOURCES += \
         App/Media/player.cpp \
         App/Media/playlistmodel.cpp \
         applistmodel.cpp \
-        main.cpp
+        main.cpp \
+        translator.cpp
 
 RESOURCES += qml.qrc \
     resource.qrc
@@ -43,8 +44,10 @@ HEADERS += \
     App/Climate/climatemodel.h \
     App/Media/player.h \
     App/Media/playlistmodel.h \
-    applistmodel.h
+    applistmodel.h \
+    translator.h
 DISTFILES += \
     applications.xml
-
-STATECHARTS +=
+TRANSLATIONS += \
+    translator/translate_vn.ts \
+    translator/translate_us.ts

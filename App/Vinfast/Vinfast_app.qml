@@ -6,7 +6,7 @@ Item {
     height: 978
 
     Image {
-        source: "qrc:/App/Vinfast/Vinfast.jpg"
+        source: "qrc:/App/Vinfast/Vinfast.png"
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
     }

@@ -6,7 +6,7 @@ Item {
     height: 978
 
     Image {
-        source: "qrc:/App/Radio/Radio.jpg"
+        source: "qrc:/App/Radio/Radio.png"
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
     }

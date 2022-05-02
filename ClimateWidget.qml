@@ -75,7 +75,7 @@ MouseArea {
     Text {
         id: autoModeId
         property bool state: climateModel.auto_mode
-        text: qsTr("AUTO")
+        text: "AUTO"
         font.family: "Arial"
         font.pixelSize: 40
         color: state ? "#EEEEEE" : "#555555"
@@ -89,7 +89,7 @@ MouseArea {
     Text {
         id: syncModeId
         property bool state: climateModel.sync_mode
-        text: qsTr("SYNC")
+        text: "SYNC"
         font.family: "Arial"
         font.pixelSize: 40
         color: state ? "#EEEEEE" : "#555555"

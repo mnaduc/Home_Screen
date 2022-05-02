@@ -8,8 +8,7 @@
 #include "App/Media/playlistmodel.h"
 #include "applistmodel.h"
 #include "App/Climate/climatemodel.h"
-#include <QFile>
-#include <QDir>
+#include "translator.h"
 
 int main(int argc, char *argv[])
 {
@@ -32,6 +31,11 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("mediaModel", player.playlist_model());
     engine.rootContext()->setContextProperty("player", player.mediaPlayer());
     engine.rootContext()->setContextProperty("utility", &player);
+
+    Translator translator;
+    QObject::connect(&translator, &Translator::languageChanged,
+                     &engine, &QQmlApplicationEngine::retranslate);
+    engine.rootContext()->setContextProperty("Translator", &translator);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

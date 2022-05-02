@@ -184,11 +184,30 @@ Item {
                         color: "#ABABAB"
                         font.family: "Arial"
                         font.pixelSize: 34
-                        text: qsTr(model.title)
+                        text: "App Name"
                         anchors {
                             horizontalCenter: parent.horizontalCenter
                             bottom: parent.bottom
                             bottomMargin: 124
+                        }
+                        Component.onCompleted: {
+                            text = Qt.binding(function(){
+                                switch (model.title) {
+                                case "Phone":
+                                    return qsTr("STR_Phone")
+                                case "Climate":
+                                    return qsTr("STR_Climate")
+                                case "Map":
+                                    return qsTr("STR_Map")
+                                case "Radio":
+                                    return qsTr("STR_Radio")
+                                case "Settings":
+                                    return qsTr("STR_Settings")
+                                case "Media":
+                                    return qsTr("STR_Media")
+                                }
+                                return qsTr(model.title)
+                            })
                         }
                     }
                     //focus state
